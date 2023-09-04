@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  jasperreports:
+    image: docker.io/bitnami/jasperreports:8
+    ports:
+      - "8089:8080"
+    volumes:
+      - "./jasperreports_data:/bitnami"
+
+    depends_on:
+      - db
+    environment:
+      - JASPERREPORTS_DATABASE_TYPE=postgresql
+      - JASPERREPORTS_DATABASE_HOST=db
+      - JASPERREPORTS_DATABASE_PORT_NUMBER=5432
+      - JASPERREPORTS_DATABASE_USER=postgres
+      - JASPERREPORTS_DATABASE_PASSWORD=postgres
+      - JASPERREPORTS_DATABASE_NAME=jasperreports
+      - JASPERREPORTS_USERNAME=jasperadmin
+      - JASPERREPORTS_PASSWORD=jasperadmin
+
+volumes:
+  db:
+    driver: local
