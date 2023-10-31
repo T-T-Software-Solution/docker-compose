@@ -5,9 +5,9 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=postgresProject01*
     ports:
-      - "5432:5432"
+      - "5430:5432"
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -16,8 +16,7 @@ services:
     ports:
       - "8089:8080"
     volumes:
-      - "./jasperreports_data:/bitnami"
-
+      - 'jasperreports_data:/bitnami/jasperreports'
     depends_on:
       - db
     environment:
@@ -25,11 +24,13 @@ services:
       - JASPERREPORTS_DATABASE_HOST=db
       - JASPERREPORTS_DATABASE_PORT_NUMBER=5432
       - JASPERREPORTS_DATABASE_USER=postgres
-      - JASPERREPORTS_DATABASE_PASSWORD=postgres
-      - JASPERREPORTS_DATABASE_NAME=jasperreports
+      - JASPERREPORTS_DATABASE_PASSWORD=postgresProject01*
+      - JASPERREPORTS_DATABASE_NAME=postgres
       - JASPERREPORTS_USERNAME=jasperadmin
-      - JASPERREPORTS_PASSWORD=jasperadmin
+      - JASPERREPORTS_PASSWORD=jasperadminProject01*
 
 volumes:
   db:
+    driver: local
+  jasperreports_data:
     driver: local
