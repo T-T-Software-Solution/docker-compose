@@ -1,16 +1,16 @@
-version: '3'
-
+version: '3.8'
+volumes:
+  https-portal-data:
 services:
   https-portal:
     image: steveltn/https-portal:1
     ports:
       - '80:80'
       - '443:443'
+    restart: always
     environment:
-      DOMAINS: 'example.com'
-      # STAGE: 'production' # Don't use production until staging works
-    volumes:
+      DOMAINS: 'demodotnett.tt-ss.net -> http://104.43.110.62:8011, demo-egp-portainer.tt-ss.net -> https://104.43.110.62:9443'
+      STAGE: 'production'
+      WEBSOCKET: 'true'
+    volumes: 
       - https-portal-data:/var/lib/https-portal
-
-volumes:
-    https-portal-data: # Recommended, to avoid re-signing when upgrading HTTPS-PORTAL
