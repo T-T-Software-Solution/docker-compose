@@ -12,5 +12,7 @@ services:
       DOMAINS: 'demodotnett.tt-ss.net -> http://104.43.110.62:8011, demo-egp-portainer.tt-ss.net -> https://104.43.110.62:9443'
       STAGE: 'production'
       WEBSOCKET: 'true'
+      PROXY_BUFFERS: '4 512k'
+      PROXY_BUFFER_SIZE: '256k'
     volumes: 
       - https-portal-data:/var/lib/https-portal
